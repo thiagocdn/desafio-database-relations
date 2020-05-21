@@ -18,7 +18,7 @@ interface IRequest {
 }
 
 @injectable()
-class CreateProductService {
+class CreateOrderService {
   constructor(
     @inject('OrdersRepository')
     private ordersRepository: IOrdersRepository,
@@ -37,11 +37,11 @@ class CreateProductService {
       throw new AppError('Customer does not exists');
     }
 
-    const productsId = products.map(product => {
+    const productsIds = products.map(product => {
       return { id: product.id };
     });
 
-    const productsData = await this.productsRepository.findAllById(productsId);
+    const productsData = await this.productsRepository.findAllById(productsIds);
 
     const productsFinal = productsData.map(productData => {
       const productFinal = products.find(
@@ -66,4 +66,4 @@ class CreateProductService {
   }
 }
 
-export default CreateProductService;
+export default CreateOrderService;

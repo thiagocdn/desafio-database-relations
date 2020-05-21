@@ -24,7 +24,7 @@ class Product {
   quantity: number;
 
   @OneToMany(() => OrdersProducts, order => order.product)
-  orders_products: OrdersProducts[];
+  order_products: OrdersProducts[];
 
   @CreateDateColumn()
   created_at: Date;

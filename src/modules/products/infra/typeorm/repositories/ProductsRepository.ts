@@ -45,11 +45,10 @@ class ProductsRepository implements IProductsRepository {
 
   public async findAllById(products: IFindProducts[]): Promise<Product[]> {
     const idList = products.map(product => product.id);
-
     const orderList = await this.ormRepository.find({ id: In(idList) });
 
     if (idList.length !== orderList.length) {
-      throw new AppError('Missing product');
+      throw new AppError('Missing Product');
     }
 
     return orderList;
@@ -68,11 +67,11 @@ class ProductsRepository implements IProductsRepository {
         throw new AppError('Product not find');
       }
 
-      const newProduct = productData;
-
-      if (newProduct.quantity < productFind.quantity) {
+      if (productData.quantity < productFind.quantity) {
         throw new AppError('Insufficient product quantity');
       }
+
+      const newProduct = productData;
 
       newProduct.quantity -= productFind.quantity;
 
