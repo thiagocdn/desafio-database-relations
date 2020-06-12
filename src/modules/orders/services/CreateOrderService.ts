@@ -55,12 +55,12 @@ class CreateOrderService {
       };
     });
 
+    await this.productsRepository.updateQuantity(products);
+
     const order = await this.ordersRepository.create({
       customer,
       products: productsFinal,
     });
-
-    await this.productsRepository.updateQuantity(products);
 
     return order;
   }
